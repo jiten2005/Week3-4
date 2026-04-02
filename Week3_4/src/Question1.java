@@ -1,79 +1,57 @@
-import java.util.*;
+class Client {
+    String name;
+    int riskScore;
 
-class Transaction {
-    String id;
-    double fee;
-    String timestamp;
-
-    Transaction(String id, double fee, String timestamp) {
-        this.id = id;
-        this.fee = fee;
-        this.timestamp = timestamp;
+    Client(String name, int riskScore) {
+        this.name = name;
+        this.riskScore = riskScore;
     }
 
     public String toString() {
-        return id + ":" + fee + "@" + timestamp;
+        return name + ":" + riskScore;
     }
 }
 
-public class Question1 {
-    public static void bubbleSort(Transaction arr[]) {
-        int n = arr.length;
-        boolean swapped;
-        int swaps = 0;
-
-        for (int i = 0; i < n - 1; i++) {
-            swapped = false;
-            for (int j = 0; j < n - i - 1; j++) {
-                if (arr[j].fee > arr[j + 1].fee) {
-                    Transaction temp = arr[j];
+public class Question2 {
+    public static void bubbleSort(Client arr[]) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j].riskScore > arr[j + 1].riskScore) {
+                    Client temp = arr[j];
                     arr[j] = arr[j + 1];
                     arr[j + 1] = temp;
-                    swaps++;
-                    swapped = true;
                 }
             }
-            if (!swapped) break;
         }
 
-        System.out.println("Bubble Sorted:");
-        for (Transaction t : arr) System.out.println(t);
-        System.out.println("Swaps = " + swaps);
+        System.out.println("Bubble Sort Asc:");
+        for (Client c : arr) System.out.println(c);
     }
 
-    public static void insertionSort(Transaction arr[]) {
+    public static void insertionSort(Client arr[]) {
         for (int i = 1; i < arr.length; i++) {
-            Transaction key = arr[i];
+            Client key = arr[i];
             int j = i - 1;
 
-            while (j >= 0 && arr[j].fee > key.fee) {
+            while (j >= 0 && arr[j].riskScore < key.riskScore) {
                 arr[j + 1] = arr[j];
                 j--;
             }
             arr[j + 1] = key;
         }
 
-        System.out.println("Insertion Sorted:");
-        for (Transaction t : arr) System.out.println(t);
-    }
-
-    public static void highFee(Transaction arr[]) {
-        System.out.println("High Fee Outliers:");
-        for (Transaction t : arr) {
-            if (t.fee > 50)
-                System.out.println(t);
-        }
+        System.out.println("Insertion Sort Desc:");
+        for (Client c : arr) System.out.println(c);
     }
 
     public static void main(String[] args) {
-        Transaction arr[] = {
-                new Transaction("id1", 10.5, "10:00"),
-                new Transaction("id2", 25.0, "09:30"),
-                new Transaction("id3", 5.0, "10:15")
+        Client arr[] = {
+                new Client("A", 20),
+                new Client("B", 50),
+                new Client("C", 80)
         };
 
         bubbleSort(arr);
         insertionSort(arr);
-        highFee(arr);
     }
 }
