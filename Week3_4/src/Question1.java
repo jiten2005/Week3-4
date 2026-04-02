@@ -1,32 +1,35 @@
-public class Problem4 {
-    static void mergeSort(double arr[], int l, int r){
-        if(l<r){
-            int m=(l+r)/2;
-            mergeSort(arr,l,m);
-            mergeSort(arr,m+1,r);
+public class Question5 {
+    public static void linearSearch(String arr[], String target){
+        for(int i=0;i<arr.length;i++){
+            if(arr[i].equals(target)){
+                System.out.println("Found at index "+i);
+                return;
+            }
+        }
+    }
 
-            double temp[]=new double[r-l+1];
-            int i=l,j=m+1,k=0;
+    public static void binarySearch(String arr[], String target){
+        int low=0, high=arr.length-1;
 
-            while(i<=m && j<=r){
-                if(arr[i]<arr[j]) temp[k++]=arr[i++];
-                else temp[k++]=arr[j++];
+        while(low<=high){
+            int mid=(low+high)/2;
+
+            if(arr[mid].equals(target)){
+                System.out.println("Found at index "+mid);
+                return;
             }
 
-            while(i<=m) temp[k++]=arr[i++];
-            while(j<=r) temp[k++]=arr[j++];
-
-            for(i=l,k=0;i<=r;i++,k++)
-                arr[i]=temp[k];
+            if(arr[mid].compareTo(target)<0)
+                low=mid+1;
+            else
+                high=mid-1;
         }
     }
 
     public static void main(String args[]){
-        double arr[]={12,8,15};
+        String arr[]={"accA","accB","accB","accC"};
 
-        mergeSort(arr,0,arr.length-1);
-
-        for(double x:arr)
-            System.out.print(x+" ");
+        linearSearch(arr,"accB");
+        binarySearch(arr,"accB");
     }
 }
