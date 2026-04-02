@@ -1,35 +1,31 @@
-public class Question5 {
-    public static void linearSearch(String arr[], String target){
-        for(int i=0;i<arr.length;i++){
-            if(arr[i].equals(target)){
-                System.out.println("Found at index "+i);
-                return;
-            }
-        }
-    }
-
-    public static void binarySearch(String arr[], String target){
+public class Question6 {
+    public static void binaryFloorCeiling(int arr[], int target){
         int low=0, high=arr.length-1;
+        int floor=-1, ceil=-1;
 
         while(low<=high){
             int mid=(low+high)/2;
 
-            if(arr[mid].equals(target)){
-                System.out.println("Found at index "+mid);
-                return;
+            if(arr[mid]==target){
+                floor=ceil=arr[mid];
+                break;
             }
 
-            if(arr[mid].compareTo(target)<0)
+            if(arr[mid]<target){
+                floor=arr[mid];
                 low=mid+1;
-            else
+            } else {
+                ceil=arr[mid];
                 high=mid-1;
+            }
         }
+
+        System.out.println("Floor = "+floor);
+        System.out.println("Ceiling = "+ceil);
     }
 
     public static void main(String args[]){
-        String arr[]={"accA","accB","accB","accC"};
-
-        linearSearch(arr,"accB");
-        binarySearch(arr,"accB");
+        int arr[]={10,25,50,100};
+        binaryFloorCeiling(arr,30);
     }
 }
